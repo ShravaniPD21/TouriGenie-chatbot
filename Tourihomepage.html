@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TouriGenie - Explore India</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Baloo Bhai 2', cursive;
+    }
+
+    body {
+      background: linear-gradient(to right, #fff5e6, #ffebcc);
+      color: #333;
+    }
+
+    header {
+      background-color: #ff6600;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 80vh;
+      background-image: url('https://images.unsplash.com/photo-1577539216274-c2eec2f6f85e');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .features {
+      padding: 4rem 2rem;
+      display: flex;
+      justify-content: space-around;
+      background-color: #fff8f0;
+    }
+
+    .feature-box {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 28%;
+      text-align: center;
+    }
+
+    .feature-box h3 {
+      margin-bottom: 1rem;
+      color: #ff6600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #ff6600;
+      color: white;
+    }
+
+    /* Floating Chatbot */
+    #chatbot-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff6600;
+      color: white;
+      padding: 1rem;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 1.5rem;
+    }
+
+    #chatbot-box {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background: white;
+      width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      padding: 1rem;
+    }
+
+    #chatbot-box select, #chatbot-box input, #chatbot-box button {
+      margin-top: 0.5rem;
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+
+    #chat-output {
+      height: 100px;
+      overflow-y: auto;
+      margin-top: 0.5rem;
+      background: #f0f0f0;
+      padding: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TouriGenie</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Destinations</a>
+      <a href="#">Packages</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2>Discover India with Ease</h2>
+    <p>Plan your next trip with cultural insights, local language help, and curated experiences tailored just for you.</p>
+  </div>
+
+  <section class="features">
+    <div class="feature-box">
+      <h3>Language Support</h3>
+      <p>Interact in English, Hindi, and Marathi seamlessly using our floating chatbot assistant.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Smart Itineraries</h3>
+      <p>AI-powered recommendations based on your interests and travel history.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Local Experiences</h3>
+      <p>Explore culture-rich activities and authentic regional attractions curated by locals.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 TouriGenie. All rights reserved.
+  </footer>
+
+  <!-- Floating Chatbot UI -->
+  <div id="chatbot-btn" onclick="toggleChatbot()">💬</div>
+
+  <div id="chatbot-box">
+    <label for="language">Select Language:</label>
+    <select id="language">
+      <option value="en">English</option>
+      <option value="hi">Hindi</option>
+      <option value="mr">Marathi</option>
+    </select>
+
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+    <div id="chat-output"></div>
+  </div>
+
+  <script>
+    function toggleChatbot() {
+      const bot = document.getElementById('chatbot-box');
+      bot.style.display = bot.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('userInput').value;
+      const lang = document.getElementById('language').value;
+      let response = '';
+
+      if (lang === 'en') {
+        response = 'Welcome to TouriGenie! How can I assist you?';
+      } else if (lang === 'hi') {
+        response = 'TouriGenie में आपका स्वागत है! मैं आपकी कैसे मदद कर सकता हूँ?';
+      } else if (lang === 'mr') {
+        response = 'TouriGenie मध्ये तुमचं स्वागत आहे! मी तुम्हाला कशी मदत करू?';
+      }
+
+      document.getElementById('chat-output').innerHTML = `<b>You:</b> ${input}<br><b>Bot:</b> ${response}`;
+      document.getElementById('userInput').value = '';
+    }
+  </script>
+</body>
+</html>
