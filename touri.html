@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TouriGenie Local Language Chatbot</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .chatbot-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      max-height: 500px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      background: #fff8f0;
+      border: 2px solid #f1c40f;
+      overflow: hidden;
+      z-index: 1000;
+    }
+    .chat-header {
+      background-color: #f39c12;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .chat-body {
+      padding: 10px;
+      height: 300px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+    .chat-footer {
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      display: flex;
+    }
+    .chat-footer input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .chat-footer button {
+      margin-left: 8px;
+      padding: 8px 12px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .language-select {
+      text-align: center;
+      margin: 10px 0;
+    }
+    .language-select select {
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .message {
+      margin: 5px 0;
+    }
+    .user-message {
+      text-align: right;
+      color: #2c3e50;
+    }
+    .bot-message {
+      text-align: left;
+      color: #8e44ad;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chatbot-widget" id="chatbot">
+  <div class="chat-header">TouriGenie 🧞 | स्थानिक सहाय्य</div>
+  <div class="language-select">
+    <label for="lang">🌐 Language: </label>
+    <select id="lang">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="mr">मराठी</option>
+    </select>
+  </div>
+  <div class="chat-body" id="chat-body">
+    <div class="bot-message message">नमस्कार! Hello! कैसे मदद कर सकते हैं?</div>
+  </div>
+  <div class="chat-footer">
+    <input type="text" id="user-input" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  const chatBody = document.getElementById('chat-body');
+  const userInput = document.getElementById('user-input');
+  const langSelect = document.getElementById('lang');
+
+  const responses = {
+    en: 'Welcome! How can I help you today?',
+    hi: 'स्वागत है! मैं आपकी कैसे मदद कर सकता हूँ?',
+    mr: 'स्वागत आहे! मी तुम्हाला कशी मदत करू शकतो?'
+  };
+
+  function sendMessage() {
+    const text = userInput.value.trim();
+    if (!text) return;
+
+    // Show user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message user-message';
+    userMsg.textContent = text;
+    chatBody.appendChild(userMsg);
+
+    // Show bot response
+    const lang = langSelect.value;
+    const botMsg = document.createElement('div');
+    botMsg.className = 'message bot-message';
+    botMsg.textContent = responses[lang];
+    chatBody.appendChild(botMsg);
+
+    userInput.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
