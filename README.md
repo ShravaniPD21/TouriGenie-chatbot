@@ -50,5 +50,4 @@ The chatbot is built using **pure HTML, CSS, and JavaScript**, making it lightwe
 
 ---
 
-## 📂 Project Structure
 
